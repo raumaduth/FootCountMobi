@@ -3,17 +3,17 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.phonegap.hello-world"
-        version   = "1.0.0">
+        id        = "com.nortech.blitz"
+        version   = "0.0.3">
 
-    <name>Hello World</name>
+    <name>HeadCount Blitz</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        HeadCount Mobile Summary reporting platform
     </description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">
-        PhoneGap Team
+    <author href="http://www.myfootcount.com" email="rumaduth@nortech.co.za">
+        Nortech Software Team
     </author>
 
     <!--
