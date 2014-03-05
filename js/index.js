@@ -1,6 +1,5 @@
 var app = {
     // Application Constructor
-	var url;
     initialize: function() {
         this.bindEvents();
     },
@@ -16,8 +15,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
         navigator.splashscreen.hide();
+        app.receivedEvent('deviceready');
         window.location = ("http://www.google.com");
     },
     // Update DOM on a Received Event
