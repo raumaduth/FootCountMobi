@@ -17,6 +17,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        navigator.splashscreen.show();
         window.location = ("http://www.google.com");
     },
     // Update DOM on a Received Event
@@ -30,10 +31,6 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
-	        
-	function onBackButton(e){
-			
-        console.log("C'mon guv! Gimme a chance!");
-    }
+	     
 
 };
