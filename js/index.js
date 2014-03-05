@@ -1,8 +1,7 @@
 var app = {
     // Application Constructor
 	var url;
-    initialize: function(url) {
-		this.url = url;
+    initialize: function() {
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -18,7 +17,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        window.location = (this.url);
+        window.location = ("http://www.google.com");
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
