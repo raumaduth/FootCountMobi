@@ -17,7 +17,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        navigator.splashscreen.show();
+        navigator.splashscreen.hide();
         window.location = ("http://www.google.com");
     },
     // Update DOM on a Received Event
