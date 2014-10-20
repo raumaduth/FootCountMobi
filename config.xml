@@ -40,11 +40,14 @@
     <!-- Plugins -->
 
     <!-- Core plugins -->
-    <gap:plugin name="org.apache.cordova.inappbrowser" /> <!--Web browser view that displays when opening links or calling window.open()-->
-    <!--<gap:plugin name="org.apache.cordova.media" /> <!--Record and play back audio files-->
-    <gap:plugin name="org.apache.cordova.network-information" /> <!--Connection object for info about device's cellular and wifi connection-->
-    <gap:plugin name="org.apache.cordova.splashscreen" /> <!--Displays and hides the application's splash screen-->
-    <gap:plugin name="org.apache.cordova.dialogs" /> <!--Visual device notifications-->
+    <!--Web browser view that displays when opening links or calling window.open()-->
+    <gap:plugin name="org.apache.cordova.inappbrowser" /> 
+    <!--Connection object for info about device's cellular and wifi connection-->
+    <gap:plugin name="org.apache.cordova.network-information" /> 
+    <!--Displays and hides the application's splash screen-->
+    <gap:plugin name="org.apache.cordova.splashscreen" /> 
+    <!--Visual device notifications-->
+    <gap:plugin name="org.apache.cordova.dialogs" /> 
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
