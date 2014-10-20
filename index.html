@@ -46,30 +46,24 @@
             //now safe to use the PhoneGap API
             document.addEventListener("online", toggleCon, false);
             document.addEventListener("offline", toggleCon, false);
-
-        //     if(navigator.network.connection.type == Connection.NONE) {
-        //         handleOffline();
-        //     } else {
-        //         handleOnline();
-        //     }
         }
 
         function onLoad() {
-	        //document.addEventListener("online", toggleCon, false);
-	        //document.addEventListener("offline", toggleCon, false);
-	        //document.addEventListener("deviceready", onDeviceReady, false);
+	        document.addEventListener("deviceready", onDeviceReady, false);
 	    }
         
         function handleOffline(){
-            navigator.notification.alert(
-                "Sorry, you appear to be offline. Please check your internet connection and try again...", //message
-                function() {$("#message").html("<h3>No internet connection!</h3>");}, //callback
-                "Offline!" //title
-                //button name (default: OK)
-            );    
+            // navigator.notification.alert(
+            //     "Sorry, you appear to be offline. Please check your internet connection and try again...", //message
+            //     function() {$("#message").html("<h3>No internet connection!</h3>");}, //callback
+            //     "Offline!" //title
+            //     //button name (default: OK)
+            // );
+            $("#message").html("<h3>No internet connection!</h3>");   
         }
         
         function handleOnline(){
+        	$("#message").html("<h3>Loading - please wait...</h3>");
             window.location = ("https://backup.myfootcount.com/Blitz/");
         }
         
@@ -82,9 +76,7 @@
         }
         
 //        $(document).ready(function() {
-//			
 //            window.location = ("https://backup.myfootcount.com/Blitz/");
-//
 //        });
     </script>
 
