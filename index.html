@@ -26,23 +26,62 @@
 				margin-left: -100px;
 			}
 		</style>
-		<title>Blitz</title>
+		<title>WebIT Mobile</title>
 		<link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 	</head>
     <body>
 		<div class=loadingDiv>
 			<div id="loadingLogo">
 				<img src="res/icon.png">
-				<h3>Loading - please wait...</h3>
+				<div id="message">
+                    <h3>Loading - please wait...</h3>
+                </div>
 			</div>
 		</div>
     </body>
     <script>
-        $(document).ready(function() {
-			
-            window.location = ("https://backup.myfootcount.com/Blitz/");
+        document.addEventListener("deviceready", onDeviceReady, false); //deviceready event fires when PhoneGap is fully loaded
+        
+        function onDeviceReady() {
+            //now safe to use the PhoneGap API
+            document.addEventListener("online", toggleCon, false);
+            document.addEventListener("offline", toggleCon, false);
 
-        });
+            if(navigator.network.connection.type == Connection.NONE) {
+                handleOffline();
+            } else {
+                handleOnline();
+            }
+        }
+        
+        function handleOffline(){
+            navigator.notification.alert(
+                "Sorry, you appear to be offline. Please check your internet connection and try again...", //message
+                function() {$("#message").html("<h3>Please check your internet connection...</h3>");}, //callback
+                "Offline!" //title
+                //button name (default: OK)
+            );
+            window.history.back();    
+        }
+        
+        function handleOnline(){
+            $("#message").html("<h3>Loading - please wait...</h3>");
+            window.location = ("https://backup.myfootcount.com/Blitz/");
+        }
+        
+        function toggleCon(e) {
+            if(e.type == "offline") {
+                handleOffline();
+            } else {
+                handleOnline();
+            }
+        }
+        
+//        $(document).ready(function() {
+//			
+//            window.location = ("https://backup.myfootcount.com/Blitz/");
+//
+//        });
     </script>
 
 </html>
