@@ -29,7 +29,7 @@
 		<title>WebIT Mobile</title>
 		<link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 	</head>
-    <body>
+    <body onload="onLoad()">
 		<div class=loadingDiv>
 			<div id="loadingLogo">
 				<img src="res/icon.png">
@@ -40,24 +40,30 @@
 		</div>
     </body>
     <script>
-        document.addEventListener("deviceready", onDeviceReady, false); //deviceready event fires when PhoneGap is fully loaded
+        //document.addEventListener("deviceready", onDeviceReady, false); //deviceready event fires when PhoneGap is fully loaded
         
-        function onDeviceReady() {
-            //now safe to use the PhoneGap API
-            document.addEventListener("online", toggleCon, false);
-            document.addEventListener("offline", toggleCon, false);
+        // function onDeviceReady() {
+        //     //now safe to use the PhoneGap API
+        //     document.addEventListener("online", toggleCon, false);
+        //     document.addEventListener("offline", toggleCon, false);
 
-            if(navigator.network.connection.type == Connection.NONE) {
-                handleOffline();
-            } else {
-                handleOnline();
-            }
-        }
+        //     if(navigator.network.connection.type == Connection.NONE) {
+        //         handleOffline();
+        //     } else {
+        //         handleOnline();
+        //     }
+        // }
+
+        function onLoad() {
+	        document.addEventListener("online", toggleCon, false);
+	        document.addEventListener("offline", toggleCon, false);
+	        document.addEventListener("deviceready", onDeviceReady, false);
+	    }
         
         function handleOffline(){
             navigator.notification.alert(
                 "Sorry, you appear to be offline. Please check your internet connection and try again...", //message
-                function() {$("#message").html("<h3>Offline!</h3>");}, //callback
+                function() {$("#message").html("<h3>No internet connection!</h3>");}, //callback
                 "Offline!" //title
                 //button name (default: OK)
             );    
