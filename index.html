@@ -63,7 +63,8 @@
         }
         
         function handleOnline(){
-        	$("#message").html("<h3>Loading - please wait...</h3>");
+        	//$("#message").html("<h3>Loading - please wait...</h3>");
+        	navigator.splashscreen.show();
             window.location = ("https://backup.myfootcount.com/Blitz/");
         }
         
