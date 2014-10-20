@@ -42,21 +42,21 @@
     <script>
         //document.addEventListener("deviceready", onDeviceReady, false); //deviceready event fires when PhoneGap is fully loaded
         
-        // function onDeviceReady() {
-        //     //now safe to use the PhoneGap API
-        //     document.addEventListener("online", toggleCon, false);
-        //     document.addEventListener("offline", toggleCon, false);
+        function onDeviceReady() {
+            //now safe to use the PhoneGap API
+            document.addEventListener("online", toggleCon, false);
+            document.addEventListener("offline", toggleCon, false);
 
         //     if(navigator.network.connection.type == Connection.NONE) {
         //         handleOffline();
         //     } else {
         //         handleOnline();
         //     }
-        // }
+        }
 
         function onLoad() {
-	        document.addEventListener("online", toggleCon, false);
-	        document.addEventListener("offline", toggleCon, false);
+	        //document.addEventListener("online", toggleCon, false);
+	        //document.addEventListener("offline", toggleCon, false);
 	        document.addEventListener("deviceready", onDeviceReady, false);
 	    }
         
