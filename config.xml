@@ -63,8 +63,8 @@
             <icon src="res/icon/android/hdpi.png"   gap:platform="android"    gap:density="hdpi" /> <!-- 72x72 px -->
             <icon src="res/icon/android/xhdpi.png"  gap:platform="android"    gap:density="xhdpi" /> <!-- 96x96 px -->
     <!-- BlackBerry 10-->
-            <icon src="res/icon/bb10/icon-86.png"     gap:platform="blackberry10"/> <!-- 86x86 px -->
-            <icon src="res/icon/bb10/icon-150.png"    gap:platform="blackberry10"/> <!-- 150x150 px -->
+            <!-- <icon src="res/icon/bb10/icon-86.png"     gap:platform="blackberry10"/> --> <!-- 86x86 px -->
+            <!-- <icon src="res/icon/bb10/icon-150.png"    gap:platform="blackberry10"/> --> <!-- 150x150 px -->
     <!-- Windows Phone 8 -->
             <icon src="res/icon/wp/ApplicationIcon.png"     gap:platform="wp8" width="99" height="99" />
             <icon src="res/icon/wp/Background.png"          gap:platform="wp8" width="159" height="159" />
@@ -102,10 +102,10 @@
         <splash src="res/screen/android/splash-port-xhdpi.png"  gap:platform="android" gap:density="port-xhdpi"/> <!-- 720x1280 px -->
 
 	<!-- BlackBerry -->
-        <splash src="res/screen/bb10/splash-1024x600.png"   gap:platform="blackberry" />
-        <splash src="res/screen/bb10/splash-600x1024.png"   gap:platform="blackberry" />
-        <splash src="res/screen/bb10/splash-1280x768.png"   gap:platform="blackberry" />
-        <splash src="res/screen/bb10/splash-768x1280.png"   gap:platform="blackberry" />
+        <!-- <splash src="res/screen/bb10/splash-1024x600.png"   gap:platform="blackberry" /> -->
+        <!-- <splash src="res/screen/bb10/splash-600x1024.png"   gap:platform="blackberry" /> -->
+        <!-- <splash src="res/screen/bb10/splash-1280x768.png"   gap:platform="blackberry" /> -->
+        <!-- <splash src="res/screen/bb10/splash-768x1280.png"   gap:platform="blackberry" /> -->
 	
     <!-- iOS -->
         <!-- images are determined by width and height. The following are supported -->
