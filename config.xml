@@ -91,15 +91,20 @@
     <!-- Define app splash screen for each platform. Name of source image is not important - will be renamed internally by Cordova -->
     <!-- Android -->
         <!-- you can use any density that exists in the Android project -->
-        <splash src="res/screen/android/splash-land-hdpi.png"   gap:platform="android" gap:density="land-hdpi"/> <!-- 800x480 px -->
-        <splash src="res/screen/android/splash-land-ldpi.png"   gap:platform="android" gap:density="land-ldpi"/> <!--320x200 px -->
-        <splash src="res/screen/android/splash-land-mdpi.png"   gap:platform="android" gap:density="land-mdpi"/> <!-- 480x320 px -->
-        <splash src="res/screen/android/splash-land-xhdpi.png"  gap:platform="android" gap:density="land-xhdpi"/> <!-- 1280x720 px --> 
+        <!-- <splash src="res/screen/android/splash-land-hdpi.png"   gap:platform="android" gap:density="land-hdpi"/> --> <!-- 800x480 px -->
+        <!-- <splash src="res/screen/android/splash-land-ldpi.png"   gap:platform="android" gap:density="land-ldpi"/> --> <!--320x200 px -->
+        <!-- <splash src="res/screen/android/splash-land-mdpi.png"   gap:platform="android" gap:density="land-mdpi"/> --> <!-- 480x320 px -->
+        <!-- <splash src="res/screen/android/splash-land-xhdpi.png"  gap:platform="android" gap:density="land-xhdpi"/> --> <!-- 1280x720 px --> 
 
-        <splash src="res/screen/android/splash-port-hdpi.png"   gap:platform="android" gap:density="port-hdpi"/> <!--480x800 px -->
-        <splash src="res/screen/android/splash-port-ldpi.png"   gap:platform="android" gap:density="port-ldpi"/> <!-- 200x320 px -->
-        <splash src="res/screen/android/splash-port-mdpi.png"   gap:platform="android" gap:density="port-mdpi"/> <!--320x480 px -->
-        <splash src="res/screen/android/splash-port-xhdpi.png"  gap:platform="android" gap:density="port-xhdpi"/> <!-- 720x1280 px -->
+        <!-- <splash src="res/screen/android/splash-port-hdpi.png"   gap:platform="android" gap:density="port-hdpi"/> --> <!--480x800 px -->
+        <!-- <splash src="res/screen/android/splash-port-ldpi.png"   gap:platform="android" gap:density="port-ldpi"/> --> <!-- 200x320 px -->
+        <!-- <splash src="res/screen/android/splash-port-mdpi.png"   gap:platform="android" gap:density="port-mdpi"/> --> <!--320x480 px -->
+        <!-- <splash src="res/screen/android/splash-port-xhdpi.png"  gap:platform="android" gap:density="port-xhdpi"/> --> <!-- 720x1280 px -->
+        
+        <gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
+        <gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
+        <gap:splash src="res/screen/android/screen-hdpi-portrait.png"  gap:platform="android" gap:density="hdpi" />
+        <gap:splash src="res/screen/android/screen-xhdpi-portrait.png" gap:platform="android" gap:density="xhdpi" />
 
 	<!-- BlackBerry -->
         <!-- <splash src="res/screen/bb10/splash-1024x600.png"   gap:platform="blackberry" /> -->
