@@ -52,8 +52,7 @@
         }
         
         function handleOnline(){
-        	$("#message").html("<h3>Loading - please wait...</h3>");
-        	navigator.splashscreen.show();
+        	//$("#message").html("<h3>Loading - please wait...</h3>");
             window.location = ("https://backup.myfootcount.com/Blitz/");
         }
 
@@ -61,6 +60,7 @@
             if(e.type == "offline") {
                 handleOffline();
             } else {
+            	location.reload();
                 handleOnline();
             }
         }
