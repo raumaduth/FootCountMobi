@@ -5,7 +5,7 @@
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="phonegap.js"></script>
-			<style>
+		<style>
 			html,body{
 				color:white;
 				background-color:#262626;
@@ -30,7 +30,7 @@
 		<title>WebIT Mobile</title>
 		<link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 	</head>
-    <body onload="onLoad()">
+    <body>
 		<div class=loadingDiv>
 			<div id="loadingLogo">
 				<img src="res/icon.png">
@@ -40,17 +40,16 @@
 			</div>
 		</div>
     </body>
-    <script>       
+    <script>
+    	document.addEventListener("deviceready", onDeviceReady, false);
+
         function handleOffline(){
             $("#message").html("<h3>No internet connection!</h3>");   
         }
         
         function handleOnline(){
-        	$("#message").html("<h3>Online...</h3>");
-            //window.location = ("https://backup.myfootcount.com/Blitz/");
-             $(document).ready(function() {
-          		window.location = ("https://backup.myfootcount.com/Blitz/");
-       		});
+        	$("#message").html("<h3>Online...</h3>"); //When connectivity is regained, the page contents seem to disappear :-/ This doesn't show...
+            window.location = ("https://backup.myfootcount.com/Blitz/");
         }
 
     	function toggleCon(e) {
@@ -69,10 +68,6 @@
             navigator.splashscreen.hide();
         }
 
-        function onLoad() {
-	        document.addEventListener("deviceready", onDeviceReady, false);
-	    }  
-        
 //        $(document).ready(function() {
 //            window.location = ("https://backup.myfootcount.com/Blitz/");
 //        });
