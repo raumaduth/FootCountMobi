@@ -69,7 +69,7 @@
             //now safe to use the PhoneGap API - add connection listeners
             document.addEventListener("online", toggleCon, false);
             document.addEventListener("offline", toggleCon, false);
-            //hide splashscreen
+            //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
             navigator.splashscreen.hide();
         }
 
