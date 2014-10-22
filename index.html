@@ -48,12 +48,14 @@
             //     "Offline!" //title
             //     //button name (default: OK)
             // );
+			alert("offline");
             $("#message").html("<h3>No internet connection!</h3>");   
         }
         
         function handleOnline(){
-        	//$("#message").html("<h3>Loading - please wait...</h3>");
-            window.location = ("https://backup.myfootcount.com/Blitz/");
+        	$("#message").html("<h3>Online...</h3>");
+        	alert("online");
+            //window.location = ("https://backup.myfootcount.com/Blitz/");
         }
 
     	function toggleCon(e) {
