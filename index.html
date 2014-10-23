@@ -96,7 +96,8 @@
             
             //Android backbutton on login page should exit the app, not take user back to index.html on PGB
 			document.addEventListener("backbutton", function(e){
-				window.close();
+				alert("backbutton pressed");
+				navigator.app.exitApp();
 			}, false);
             //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
             navigator.splashscreen.hide();
