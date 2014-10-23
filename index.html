@@ -48,7 +48,7 @@
         }
         
         function handleOnline(){
-        	$("#message").html("<h3>Online...</h3>"); //When connectivity is regained, the page contents seem to disappear :-/ This doesn't show...
+        	$("#message").html("<h3>Loading - please wait...</h3>");
             window.location = ("https://backup.myfootcount.com/Blitz/");
         }
 
@@ -64,7 +64,7 @@
             //now safe to use the PhoneGap API - add connection listeners
             // document.addEventListener("online", toggleCon, false);
             // document.addEventListener("offline", toggleCon, false);
-            window.addEventListener("online", toggleCon, false);
+            window.addEventListener("online", toggleCon, false); //using Navigator object
             window.addEventListener("offline", toggleCon, false);
             //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
             navigator.splashscreen.hide();
