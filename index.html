@@ -96,20 +96,7 @@
             
             //Android backbutton on login page should exit the app, not take user back to index.html on PGB
 			document.addEventListener("backbutton", function(e){
-				alert("backbutton pressed");
-			    //if($.mobile.activePage.is('#page-redirect')){
-			        /* 
-			         Event preventDefault/stopPropagation not required as adding backbutton
-			          listener itself override the default behaviour. Refer below PhoneGap link.
-			        */
-			        //e.preventDefault();
-			        //alert("page-redirect is active page");
-			        //navigator.app.exitApp();
-			    //}
-			    //else {
-			    	//alert("page-redirect is not active page");
-			        //navigator.app.backHistory()
-			    //}
+				window.close();
 			}, false);
             //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
             navigator.splashscreen.hide();
