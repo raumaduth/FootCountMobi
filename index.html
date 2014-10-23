@@ -30,7 +30,7 @@
 		<title>WebIT Mobile</title>
 		<link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
 	</head>
-    <body onload="onLoad()">
+    <body>
 		<div class=loadingDiv>
 			<div id="loadingLogo">
 				<img src="res/icon.png">
@@ -42,12 +42,7 @@
 
     </body>
     <script>
-	    function onLoad(){
-
-	    }
-
-
-    	document.addEventListener("deviceready", onDeviceReady, false);
+	    document.addEventListener("deviceready", onDeviceReady, false);
 
         function handleOffline(){
             $("#message").html("<h3>No internet connection!</h3>");   
