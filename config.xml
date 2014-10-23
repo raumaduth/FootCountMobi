@@ -44,7 +44,7 @@
 
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />           <!--Web browser view that displays when opening links or calling window.open()-->
-    <!-- <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" /> -->   <!--Connection object for info about device's cellular and wifi connection-->
+    <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />   <!--Connection object for info about device's cellular and wifi connection-->
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />           <!--Displays and hides the application's splash screen-->
     <!-- <gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" /> -->               <!--Visual device notifications-->
 
