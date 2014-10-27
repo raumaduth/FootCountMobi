@@ -1,79 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="phonegap.js"></script>
-		<style>
-			html,body{
-				color:white;
-				background-color:#262626;
-			}
-		    .loadingDiv {
-				position:fixed;
-				left:0px;
-				top:0px;
-				right:0px;
-				bottom:0px;
-				background-color: #262626;
-			}
-			#loadingLogo{
-				text-align: center;
-				position: fixed;
-				top: 50%;
-				left: 50%;
-				margin-top: -50px;	
-				margin-left: -100px;
-			}
-		</style>
-		<title>WebIT Mobile</title>
-		<link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-	</head>
-    <body>
-		<div class=loadingDiv>
-			<div id="loadingLogo">
-				<img src="res/icon.png">
-				<div id="message">
-                    <h3>Loading - please wait...</h3>
-                </div>
-			</div>
-		</div>
-
-    </body>
-    <script>
-	    document.addEventListener("deviceready", onDeviceReady, false);
-
-        function handleOffline(){
-            $("#message").html("<h3>No internet connection!</h3>");   
-        }
-        
-        function handleOnline(){
-        	$("#message").html("<h3>Loading - please wait...</h3>");
-            //window.location = ("https://backup.myfootcount.com/WebITMobile/");
-            var ref = window.open("https://backup.myfootcount.com/WebITMobile/","_self","location=yes");
-        }
-
-    	function toggleCon(e) {
-            if(e.type == "offline") {
-                handleOffline();
-            } else {
-                handleOnline();
-            }
-        }
-
-        function onDeviceReady() {
-            //now safe to use the PhoneGap API - add connection listeners
-            document.addEventListener("online", toggleCon, false);
-            document.addEventListener("offline", toggleCon, false);
-            
-            //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
-            navigator.splashscreen.hide();
-        }
-
-//        $(document).ready(function() {
-//            window.location = ("https://backup.myfootcount.com/Blitz/");
-//        });
-    </script>
-
+  <head>
+   <title>tittle</title>
+   <script>
+     window.location='./main.html';
+   </script>
+  <body>
+  </body>
 </html>
