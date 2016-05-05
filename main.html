@@ -43,37 +43,136 @@
     </body>
     <script>
 	    document.addEventListener("deviceready", onDeviceReady, false);
-
-        function handleOffline(){
-            $("#message").html("<h3>No internet connection!</h3>");   
+            
+        var iabRef = null;
+        var internetConnected = true; 
+        
+        //fires when the (hidden) page has finished being loaded
+        function iabLoadStop(event){
+            iabRef.show();
         }
         
-        function handleOnline(){
-        	$("#message").html("<h3>Loading - please wait...</h3>");
-            //window.location = ("https://backup.myfootcount.com/WebITMobile/");
-            var ref = window.open("https://backup.myfootcount.com/Blitz/","_self","location=yes");
+        //fires if an error occurs while trying to load the page
+        function iabLoadError(event){                
+            $("#message").html("<h3>Oops - something went wrong... Please contact Support!</h3>");
+            console.log("Error loading URL: " + event.message);
         }
-
-    	function toggleCon(e) {
-            if(e.type == "offline") {
+        
+        //fires when the InAppBrowser closes
+        function iabClose(event){
+            exit();
+        }
+        
+        //add the InAppBrowser listeners
+        function addIABListeners(){
+            iabRef.addEventListener('loadstop', iabLoadStop);
+            iabRef.addEventListener('loaderror', iabLoadError);
+            iabRef.addEventListener('exit', iabClose);
+        }
+        
+        //remove the InAppBrowser listeners
+        function removeIABListeners(){
+            iabRef.removeEventListener('loadstop', iabLoadStop);
+            iabRef.removeEventListener('loaderror', iabLoadError);
+            iabRef.removeEventListener('exit', iabClose);
+        }
+        
+        //ONLINE: change the message + try load the URL
+        function handleOnline(){
+            $("#message").html("<h3>Loading - please wait...</h3>");
+            
+            //location=no: don't show url; hidden=yes: load the page, but hide it ie. preload the page
+            iabRef = window.open("https://www.myfootcount.com/WebITMobile/","_blank","location=no,hidden=yes");
+            addIABListeners();
+        }
+        
+        //OFFLINE: change the message
+        function handleOffline(){
+            $("#message").html("<h3>No internet connection!</h3>");
+        }
+        
+        //fires when the application goes online, from being offline 
+        function onOnline(){
+            if(internetConnected){ //avoid multiple triggering (plugin bug: Android often triggers the event twice)
+                return;
+            }
+            internetConnected = true; 
+            handleOnline();
+        }
+        
+        //fires when the application goes offline, from being online (or if it's intially offline)
+        function onOffline(){
+            if(!internetConnected){ //avoid multiple triggering (plugin bug: Android often triggers the event twice)
+                return;
+            }
+            internetConnected = false;
+            handleOffline();
+        }
+        
+        //check the initial state of the internet connection - set the flag and trigger the appropriate response
+        function initialInternetCheck(){
+            var networkState = navigator.connection.type;
+            if(networkState == Connection.NONE){
+                internetConnected = false;
                 handleOffline();
-            } else {
+            }else{
+                internetConnected = true;
                 handleOnline();
             }
         }
-
-        function onDeviceReady() {
-            //now safe to use the PhoneGap API - add connection listeners
-            document.addEventListener("online", toggleCon, false);
-            document.addEventListener("offline", toggleCon, false);
+        
+        function exit(){
+            removeIABListeners();
+            removeNetworkListeners();
+            document.removeEventListener("backbutton", onBackButton, false);
+            
+            delete window.open; //revert call back to prototype's default
+            
+            navigator.app.exitApp(); //quit the app
+        }
+        
+        function onBackButton(e){
+            e.preventDefault();
+            //navigator.app.exitApp(); //doesn't appear to work on Android - the app remains open in the background
+            //have added '<preference name="keepRunning" value="false" />' to the config.xml, to hopefully combat this
+            var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
+            if (response == true) { //OK
+                exit();
+            } else { //Cancel
+                //do nothing
+            }
+        }
+        
+        //add the network listeners
+        function addNetworkListeners(){
+            //"online" event is not triggered if the device is initially online - only if it changes
+            document.addEventListener("online", onOnline, false);
+            //"offline" event triggers if the device is initially offline AND if it changes
+            document.addEventListener("offline", onOffline, false);
+        }
+        
+        //remove the network listeners
+        function removeNetworkListeners(){
+            document.removeEventListener("online", onOnline, false);
+            document.removeEventListener("offline", onOffline, false);
+        }
+                
+        function onDeviceReady(){
+            initialInternetCheck();
+            
+            addNetworkListeners();
+            
+            document.addEventListener("backbutton", onBackButton, false);
+            
+            window.open = cordova.InAppBrowser.open; //hook window.open to inappbrowser
+            
+            // setTimeout(function() {
+            //     navigator.splashscreen.hide();
+            // }, 2000);
             
             //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
             navigator.splashscreen.hide();
         }
-
-//        $(document).ready(function() {
-//            window.location = ("https://backup.myfootcount.com/Blitz/");
-//        });
     </script>
 
 </html>
