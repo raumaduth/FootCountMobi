@@ -65,16 +65,20 @@
         
         //add the InAppBrowser listeners
         function addIABListeners(){
-            iabRef.addEventListener('loadstop', iabLoadStop);
-            iabRef.addEventListener('loaderror', iabLoadError);
-            iabRef.addEventListener('exit', iabClose);
+            if(iabRef != null){
+                iabRef.addEventListener('loadstop', iabLoadStop);
+                iabRef.addEventListener('loaderror', iabLoadError);
+                iabRef.addEventListener('exit', iabClose);
+            }
         }
         
         //remove the InAppBrowser listeners
         function removeIABListeners(){
-            iabRef.removeEventListener('loadstop', iabLoadStop);
-            iabRef.removeEventListener('loaderror', iabLoadError);
-            iabRef.removeEventListener('exit', iabClose);
+            if(iabRef != null){
+                iabRef.removeEventListener('loadstop', iabLoadStop);
+                iabRef.removeEventListener('loaderror', iabLoadError);
+                iabRef.removeEventListener('exit', iabClose);
+            }
         }
         
         //ONLINE: change the message + try load the URL
