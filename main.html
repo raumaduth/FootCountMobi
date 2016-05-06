@@ -59,13 +59,12 @@
             //fires when the InAppBrowser closes
             //[this fires when hitting the back button after the InAppBrowser has just launched, before logging in for the first time]
             function iabClose(event) {
-                event.preventDefault();
-                var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
-                if (response == true) { //OK
+                // var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
+                // if (response == true) { //OK
                     exit();
-                } else { //Cancel
-                    //do nothing
-                }
+                // } else { //Cancel
+                //     //do nothing
+                // }
             }
 
             //add the InAppBrowser listeners
@@ -143,12 +142,12 @@
             //[this fires when hitting the back button before the InAppBrowser is launched]
             function onBackButton(event) {
                 event.preventDefault();
-                var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
-                if (response == true) { //OK
+                // var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
+                // if (response == true) { //OK
                     exit();
-                } else { //Cancel
-                    //do nothing
-                }
+                // } else { //Cancel
+                //     //do nothing
+                // }
             }
 
             //add the network listeners
