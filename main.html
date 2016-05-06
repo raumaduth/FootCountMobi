@@ -2,194 +2,181 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="phonegap.js"></script>
-		<style>
-			html,body{
-				color:white;
-				background-color:#262626;
-			}
-		    .loadingDiv {
-				position:fixed;
-				left:0px;
-				top:0px;
-				right:0px;
-				bottom:0px;
-				background-color: #262626;
-			}
-			#loadingLogo{
-				text-align: center;
-				position: fixed;
-				top: 50%;
-				left: 50%;
-				margin-top: -50px;	
-				margin-left: -100px;
-			}
-		</style>
-		<title>WebIT Mobile</title>
-		<link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-	</head>
+
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="phonegap.js"></script>
+        <style>
+            html,body{
+                color:white;
+                background-color:#262626;
+            }
+            .loadingDiv {
+                position:fixed;
+                left:0px;
+                top:0px;
+                right:0px;
+                bottom:0px;
+                background-color: #262626;
+            }
+            #loadingLogo{
+                text-align: center;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                margin-top: -50px;  
+                margin-left: -100px;
+            }
+        </style>
+        <title>WebIT Mobile</title>
+        <link href="res/nortech_tabicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    </head>
     <body>
-		<div class=loadingDiv>
-			<div id="loadingLogo">
-				<img src="res/icon.png">
-				<div id="message">
+        <div class=loadingDiv>
+            <div id="loadingLogo">
+                <img src="res/icon.png" alt="WebIT">
+                <div id="message">
                     <h3>Loading - please wait...</h3>
                 </div>
-			</div>
-		</div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("deviceready", onDeviceReady, false);
 
-    </body>
-    <script>
-	    document.addEventListener("deviceready", onDeviceReady, false);
-            
-        var iabRef = null;
-        var internetConnected = true; 
+            var iabRef = null;
+            var internetConnected = true;
 
-        //fires when the (hidden) page starts being loaded
-        function iabLoadStart(event){
-            alert(event.url);
-            if((event.url).indexOf("access_token") > -1){
+            //fires when the (hidden) page has finished being loaded
+            function iabLoadStop(event) {
+                iabRef.show();
+            }
+
+            //fires if an error occurs while trying to load the page
+            function iabLoadError(event) {
                 $("#message").html("<h3>Oops - something went wrong... Please contact Support!</h3>");
-                iab.close();
+                iabRef.close();
             }
-        }
-        
-        //fires when the (hidden) page has finished being loaded
-        function iabLoadStop(event){
-            iabRef.show();
-        }
-        
-        //fires if an error occurs while trying to load the page
-        function iabLoadError(event){                
-            $("#message").html("<h3>Oops - something went wrong... Please contact Support!</h3>");
-            iab.close();
-        }
-        
-        //fires when the InAppBrowser closes
-        //[this fires when hitting the back button after the InAppBrowser has just launched, before logging in for the first time]
-        function iabClose(event){
-            e.preventDefault();
-            var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
-            if (response == true) { //OK
-                exit();
-            } else { //Cancel
-                //do nothing
+
+            //fires when the InAppBrowser closes
+            //[this fires when hitting the back button after the InAppBrowser has just launched, before logging in for the first time]
+            function iabClose(event) {
+                event.preventDefault();
+                var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
+                if (response == true) { //OK
+                    exit();
+                } else { //Cancel
+                    //do nothing
+                }
             }
-        }
-        
-        //add the InAppBrowser listeners
-        function addIABListeners(){
-            if(iabRef != null){
-                iabRef.addEventListener('loadstart', iabLoadStart);
-                iabRef.addEventListener('loadstop', iabLoadStop);
-                iabRef.addEventListener('loaderror', iabLoadError);
-                iabRef.addEventListener('exit', iabClose);
+
+            //add the InAppBrowser listeners
+            function addIABListeners() {
+                if (iabRef != null) {
+                    iabRef.addEventListener('loadstop', iabLoadStop);
+                    iabRef.addEventListener('loaderror', iabLoadError);
+                    iabRef.addEventListener('exit', iabClose);
+                }
             }
-        }
-        
-        //remove the InAppBrowser listeners
-        function removeIABListeners(){
-            if(iabRef != null){
-                iabRef.removeEventListener('loadstart', iabLoadStart);
-                iabRef.removeEventListener('loadstop', iabLoadStop);
-                iabRef.removeEventListener('loaderror', iabLoadError);
-                iabRef.removeEventListener('exit', iabClose);
+
+            //remove the InAppBrowser listeners
+            function removeIABListeners() {
+                if (iabRef != null) {
+                    iabRef.removeEventListener('loadstop', iabLoadStop);
+                    iabRef.removeEventListener('loaderror', iabLoadError);
+                    iabRef.removeEventListener('exit', iabClose);
+                }
             }
-        }
-        
-        //ONLINE: change the message + try load the URL
-        function handleOnline(){
-            $("#message").html("<h3>Loading - please wait...</h3>");
-            
-            //location=no: don't show url; hidden=yes: load the page, but hide it ie. preload the page
-            iabRef = window.open("https://www.myfootcount.com/WebITMobile/","_blank","location=no,hidden=yes");
-            addIABListeners();
-        }
-        
-        //OFFLINE: change the message
-        function handleOffline(){
-            $("#message").html("<h3>No internet connection!</h3>");
-        }
-        
-        //fires when the application goes online, from being offline 
-        function onOnline(){
-            if(internetConnected){ //avoid multiple triggering (plugin bug: Android often triggers the event twice)
-                return;
+
+            //ONLINE: change the message + try load the URL
+            function handleOnline() {
+                $("#message").html("<h3>Loading - please wait...</h3>");
+
+                //location=no: don't show url; hidden=yes: load the page, but hide it ie. preload the page
+                iabRef = window.open("https://www.myfootcount.com/WebITMobile/", "_blank", "location=no,hidden=yes");
+                addIABListeners();
             }
-            internetConnected = true; 
-            handleOnline();
-        }
-        
-        //fires when the application goes offline, from being online (or if it's intially offline)
-        function onOffline(){
-            if(!internetConnected){ //avoid multiple triggering (plugin bug: Android often triggers the event twice)
-                return;
+
+            //OFFLINE: change the message
+            function handleOffline() {
+                $("#message").html("<h3>No internet connection!</h3>");
             }
-            internetConnected = false;
-            handleOffline();
-        }
-        
-        //check the initial state of the internet connection - set the flag and trigger the appropriate response
-        function initialInternetCheck(){
-            var networkState = navigator.connection.type;
-            if(networkState == Connection.NONE){
-                internetConnected = false;
-                handleOffline();
-            }else{
+
+            //fires when the application goes online, from being offline 
+            function onOnline() {
+                if (internetConnected) { //avoid multiple triggering (plugin bug: Android often triggers the event twice)
+                    return;
+                }
                 internetConnected = true;
                 handleOnline();
             }
-        }
-        
-        function exit(){
-            removeIABListeners();
-            removeNetworkListeners();
-            document.removeEventListener("backbutton", onBackButton, false);
 
-            delete window.open; //revert call back to prototype's default
-
-            navigator.app.exitApp(); //quit the app
-        }
-        
-        //[this fires when hitting the back button before the InAppBrowser is launched]
-        function onBackButton(e){
-            e.preventDefault();
-            var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
-            if (response == true) { //OK
-                exit();
-            } else { //Cancel
-                //do nothing
+            //fires when the application goes offline, from being online (or if it's intially offline)
+            function onOffline() {
+                if (!internetConnected) { //avoid multiple triggering (plugin bug: Android often triggers the event twice)
+                    return;
+                }
+                internetConnected = false;
+                handleOffline();
             }
-        }
-        
-        //add the network listeners
-        function addNetworkListeners(){
-            //"online" event is not triggered if the device is initially online - only if it changes
-            document.addEventListener("online", onOnline, false);
-            //"offline" event triggers if the device is initially offline AND if it changes
-            document.addEventListener("offline", onOffline, false);
-        }
-        
-        //remove the network listeners
-        function removeNetworkListeners(){
-            document.removeEventListener("online", onOnline, false);
-            document.removeEventListener("offline", onOffline, false);
-        }
-                
-        function onDeviceReady(){
-            initialInternetCheck();
-            
-            addNetworkListeners();
-            
-            document.addEventListener("backbutton", onBackButton, false);
-            
-            window.open = cordova.InAppBrowser.open; //hook window.open to inappbrowser
-            
-            //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
-            navigator.splashscreen.hide();
-        }
-    </script>
 
+            //check the initial state of the internet connection - set the flag and trigger the appropriate response
+            function initialInternetCheck() {
+                var networkState = navigator.connection.type;
+                if (networkState == Connection.NONE) {
+                    internetConnected = false;
+                    handleOffline();
+                } else {
+                    internetConnected = true;
+                    handleOnline();
+                }
+            }
+
+            function exit() {
+                removeIABListeners();
+                removeNetworkListeners();
+                document.removeEventListener("backbutton", onBackButton, false);
+
+                delete window.open; //revert call back to prototype's default
+
+                navigator.app.exitApp(); //quit the app
+            }
+
+            //[this fires when hitting the back button before the InAppBrowser is launched]
+            function onBackButton(event) {
+                event.preventDefault();
+                var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
+                if (response == true) { //OK
+                    exit();
+                } else { //Cancel
+                    //do nothing
+                }
+            }
+
+            //add the network listeners
+            function addNetworkListeners() {
+                //"online" event is not triggered if the device is initially online - only if it changes
+                document.addEventListener("online", onOnline, false);
+                //"offline" event triggers if the device is initially offline AND if it changes
+                document.addEventListener("offline", onOffline, false);
+            }
+
+            //remove the network listeners
+            function removeNetworkListeners() {
+                document.removeEventListener("online", onOnline, false);
+                document.removeEventListener("offline", onOffline, false);
+            }
+
+            function onDeviceReady() {
+                initialInternetCheck();
+
+                addNetworkListeners();
+
+                document.addEventListener("backbutton", onBackButton, false);
+
+                window.open = cordova.InAppBrowser.open; //hook window.open to inappbrowser
+
+                //hide splashscreen (otherwise will be visible for 3 sec, which is the default)
+                navigator.splashscreen.hide();
+            }
+        </script>
+    </body>
 </html>
