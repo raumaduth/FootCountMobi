@@ -46,6 +46,15 @@
             
         var iabRef = null;
         var internetConnected = true; 
+
+        //fires when the (hidden) page starts being loaded
+        function iabLoadStart(event){
+            alert(event.url);
+            if((event.url).indexOf("access_token") > -1){
+                $("#message").html("<h3>Oops - something went wrong... Please contact Support!</h3>");
+                iab.close();
+            }
+        }
         
         //fires when the (hidden) page has finished being loaded
         function iabLoadStop(event){
@@ -55,12 +64,13 @@
         //fires if an error occurs while trying to load the page
         function iabLoadError(event){                
             $("#message").html("<h3>Oops - something went wrong... Please contact Support!</h3>");
-            console.log("Error loading URL: " + event.message);
+            iab.close();
         }
         
         //fires when the InAppBrowser closes
         //[this fires when hitting the back button after the InAppBrowser has just launched, before logging in for the first time]
         function iabClose(event){
+            e.preventDefault();
             var response = confirm("Are you sure you want to exit?"); // prompt the user with the choice to exit the app or not
             if (response == true) { //OK
                 exit();
@@ -72,6 +82,7 @@
         //add the InAppBrowser listeners
         function addIABListeners(){
             if(iabRef != null){
+                iabRef.addEventListener('loadstart', iabLoadStart);
                 iabRef.addEventListener('loadstop', iabLoadStop);
                 iabRef.addEventListener('loaderror', iabLoadError);
                 iabRef.addEventListener('exit', iabClose);
@@ -81,7 +92,7 @@
         //remove the InAppBrowser listeners
         function removeIABListeners(){
             if(iabRef != null){
-                alert("iabRef is not null");
+                iabRef.removeEventListener('loadstart', iabLoadStart);
                 iabRef.removeEventListener('loadstop', iabLoadStop);
                 iabRef.removeEventListener('loaderror', iabLoadError);
                 iabRef.removeEventListener('exit', iabClose);
@@ -133,15 +144,12 @@
         }
         
         function exit(){
-            alert("exit() - removing IAB listeners if applicable");
             removeIABListeners();
-            alert("exit() - removing Network listeners");
             removeNetworkListeners();
-            alert("exit() - removing back button event listener");
             document.removeEventListener("backbutton", onBackButton, false);
-            alert("exit() - reverting call back to prototype's default");
+
             delete window.open; //revert call back to prototype's default
-            alert("exit() - calling navigator.app.exitApp()");
+
             navigator.app.exitApp(); //quit the app
         }
         
@@ -166,7 +174,6 @@
         
         //remove the network listeners
         function removeNetworkListeners(){
-            alert("removing network listeners");
             document.removeEventListener("online", onOnline, false);
             document.removeEventListener("offline", onOffline, false);
         }
